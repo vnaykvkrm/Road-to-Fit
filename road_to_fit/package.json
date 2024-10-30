@@ -1,0 +1,12 @@
+{
+  "name": "road_to_fit",
+  "scripts": {
+    "dev": "bun run --hot src/index.ts"
+  },
+  "dependencies": {
+    "hono": "^4.6.8"
+  },
+  "devDependencies": {
+    "@types/bun": "latest"
+  }
+}
