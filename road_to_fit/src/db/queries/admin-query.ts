@@ -1,6 +1,6 @@
 import { eq } from 'drizzle-orm'
 import { db } from '..'
-import { adminTable, InsertUser, SelectUser } from '../schema/admin'
+import { adminTable, InsertUser, SelectUser } from '../schema/admin.schema'
 
 // Create admin
 export const createAdmin = async (data: InsertUser) => {
