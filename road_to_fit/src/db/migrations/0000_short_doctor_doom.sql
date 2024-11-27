@@ -7,7 +7,7 @@ CREATE TABLE `admin` (
 );
 --> statement-breakpoint
 CREATE UNIQUE INDEX `admin_email_unique` ON `admin` (`email`);--> statement-breakpoint
-CREATE TABLE `trainers` (
+CREATE TABLE `trainerss` (
 	`id` integer PRIMARY KEY AUTOINCREMENT NOT NULL,
 	`name` text NOT NULL,
 	`email` text NOT NULL,
@@ -20,5 +20,5 @@ CREATE TABLE `trainers` (
 	`created_at` text DEFAULT 'CURRENT_TIMESTAMP'
 );
 --> statement-breakpoint
-CREATE UNIQUE INDEX `trainers_email_unique` ON `trainers` (`email`);--> statement-breakpoint
-CREATE UNIQUE INDEX `trainers_phone_unique` ON `trainers` (`phone`);
+CREATE UNIQUE INDEX `trainerss_email_unique` ON `trainerss` (`email`);--> statement-breakpoint
+CREATE UNIQUE INDEX `trainerss_phone_unique` ON `trainerss` (`phone`);

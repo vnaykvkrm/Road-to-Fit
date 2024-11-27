@@ -1,8 +1,8 @@
 {
   "version": "6",
   "dialect": "sqlite",
-  "id": "160247a1-27eb-4289-a611-ef2c1151e7ed",
-  "prevId": "00000000-0000-0000-0000-000000000000",
+  "id": "599ef028-244a-467b-9713-31df51529304",
+  "prevId": "160247a1-27eb-4289-a611-ef2c1151e7ed",
   "tables": {
     "admin": {
       "name": "admin",
@@ -57,8 +57,8 @@
       "uniqueConstraints": {},
       "checkConstraints": {}
     },
-    "trainerss": {
-      "name": "trainerss",
+    "trainers": {
+      "name": "trainers",
       "columns": {
         "id": {
           "name": "id",
@@ -133,15 +133,15 @@
         }
       },
       "indexes": {
-        "trainerss_email_unique": {
-          "name": "trainerss_email_unique",
+        "trainers_email_unique": {
+          "name": "trainers_email_unique",
           "columns": [
             "email"
           ],
           "isUnique": true
         },
-        "trainerss_phone_unique": {
-          "name": "trainerss_phone_unique",
+        "trainers_phone_unique": {
+          "name": "trainers_phone_unique",
           "columns": [
             "phone"
           ],
@@ -158,7 +158,9 @@
   "enums": {},
   "_meta": {
     "schemas": {},
-    "tables": {},
+    "tables": {
+      "\"trainerss\"": "\"trainers\""
+    },
     "columns": {}
   },
   "internal": {

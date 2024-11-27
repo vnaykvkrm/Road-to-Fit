@@ -1,20 +1,20 @@
 import { eq } from 'drizzle-orm'
 import { db } from '..'
 import {
-  trainerTable,
-  InsertTrainer,
-  SelectTrainer,
+  trainers,
+  InsertTrainers,
+  SelectTrainers,
 } from '../schema/trainers.schema'
 
-type UpdateTrainer = Partial<InsertTrainer>
+type UpdateTrainer = Partial<InsertTrainers>
 
 // Create trainer
 export const createTrainer = async (
-  trainerData: InsertTrainer
-): Promise<SelectTrainer> => {
+  trainerData: InsertTrainers
+): Promise<SelectTrainers> => {
   try {
     const [newTrainer] = await db
-      .insert(trainerTable)
+      .insert(trainers)
       .values(trainerData)
       .returning()
     return newTrainer
@@ -25,9 +25,9 @@ export const createTrainer = async (
 }
 
 // Get all trainers
-export const getAllTrainers = async (): Promise<SelectTrainer[]> => {
+export const getAllTrainers = async (): Promise<SelectTrainers[]> => {
   try {
-    let query = db.select().from(trainerTable)
+    let query = db.select().from(trainers)
     return await query.execute()
   } catch (error) {
     console.error('Error fetching trainers:', error)
@@ -38,12 +38,12 @@ export const getAllTrainers = async (): Promise<SelectTrainer[]> => {
 // Get a single trainer by ID
 export const getTrainerById = async (
   id: number
-): Promise<SelectTrainer | null> => {
+): Promise<SelectTrainers | null> => {
   try {
     const [trainer] = await db
       .select()
-      .from(trainerTable)
-      .where(eq(trainerTable.id, id))
+      .from(trainers)
+      .where(eq(trainers.id, id))
     return trainer || null
   } catch (error) {
     console.error(`Error fetching trainer with ID ${id}:`, error)
@@ -55,12 +55,12 @@ export const getTrainerById = async (
 export const updateTrainer = async (
   id: number,
   updateData: UpdateTrainer
-): Promise<SelectTrainer | null> => {
+): Promise<SelectTrainers | null> => {
   try {
     const [updatedTrainer] = await db
-      .update(trainerTable)
+      .update(trainers)
       .set(updateData)
-      .where(eq(trainerTable.id, id))
+      .where(eq(trainers.id, id))
       .returning()
     return updatedTrainer || null
   } catch (error) {
@@ -73,8 +73,8 @@ export const updateTrainer = async (
 export const deleteTrainer = async (id: number): Promise<boolean> => {
   try {
     const result = await db
-      .delete(trainerTable)
-      .where(eq(trainerTable.id, id))
+      .delete(trainers)
+      .where(eq(trainers.id, id))
       .execute()
     return result.rowsAffected > 0
   } catch (error) {
