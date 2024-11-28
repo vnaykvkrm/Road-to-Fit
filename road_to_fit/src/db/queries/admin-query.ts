@@ -14,7 +14,9 @@ export const deleteAdmin = async (email: SelectUser['email']) => {
 
 // Get all admins
 export const getAdmins = async () => {
-  return await db.select().from(admin)
+  return await db
+    .select({ id: admin.id, name: admin.name, email: admin.email })
+    .from(admin)
 }
 
 // get admin by id

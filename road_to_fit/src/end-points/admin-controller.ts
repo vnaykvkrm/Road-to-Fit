@@ -1,11 +1,11 @@
 import { Hono } from 'hono'
 import { createAdmin, deleteAdmin, getAdmins } from '../db/queries/admin-query'
 
-const app = new Hono()
+const admin = new Hono()
 
 // Select an admin
 
-app.get('/', async (c) => {
+admin.get('/', async (c) => {
   try {
     const admins = await getAdmins()
     return c.json(admins, 200)
@@ -16,7 +16,7 @@ app.get('/', async (c) => {
 })
 
 // Create a new admin
-app.post('/create', async (c) => {
+admin.post('/create', async (c) => {
   const { name, email, password, role } = await c.req.json()
 
   if (!name || !email || !password || !role) {
@@ -37,7 +37,7 @@ app.post('/create', async (c) => {
 })
 
 // Delete an admin
-app.delete('/delete', async (c) => {
+admin.delete('/delete', async (c) => {
   const { email } = await c.req.json()
   if (!email) {
     return c.json({ error: 'Email is required' }, 400)
@@ -50,3 +50,5 @@ app.delete('/delete', async (c) => {
     return c.json({ error: 'Failed to delete admin' }, 500)
   }
 })
+
+export default admin

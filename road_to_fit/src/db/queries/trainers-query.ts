@@ -7,6 +7,7 @@ import {
 } from '../schema/trainers.schema'
 
 type UpdateTrainer = Partial<InsertTrainers>
+type SelectTrainersWithId = Partial<SelectTrainers>
 
 // Create trainer
 export const createTrainer = async (
@@ -25,9 +26,22 @@ export const createTrainer = async (
 }
 
 // Get all trainers
-export const getAllTrainers = async (): Promise<SelectTrainers[]> => {
+export const getAllTrainers = async (): Promise<SelectTrainersWithId[]> => {
   try {
-    let query = db.select().from(trainers)
+    let query = db
+      .select({
+        id: trainers.id,
+        name: trainers.name,
+        email: trainers.email,
+        phone: trainers.phone,
+        expertise: trainers.expertise,
+        certifications: trainers.certifications,
+        bio: trainers.bio,
+        hourlyRate: trainers.hourlyRate,
+        availability: trainers.availability,
+        createdAt: trainers.createdAt,
+      })
+      .from(trainers)
     return await query.execute()
   } catch (error) {
     console.error('Error fetching trainers:', error)
@@ -38,10 +52,21 @@ export const getAllTrainers = async (): Promise<SelectTrainers[]> => {
 // Get a single trainer by ID
 export const getTrainerById = async (
   id: number
-): Promise<SelectTrainers | null> => {
+): Promise<SelectTrainersWithId | null> => {
   try {
     const [trainer] = await db
-      .select()
+      .select({
+        id: trainers.id,
+        name: trainers.name,
+        email: trainers.email,
+        phone: trainers.phone,
+        expertise: trainers.expertise,
+        certifications: trainers.certifications,
+        bio: trainers.bio,
+        hourlyRate: trainers.hourlyRate,
+        availability: trainers.availability,
+        createdAt: trainers.createdAt,
+      })
       .from(trainers)
       .where(eq(trainers.id, id))
     return trainer || null

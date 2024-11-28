@@ -5,6 +5,7 @@ export const trainers = sqliteTable('trainers', {
   name: text('name').notNull(),
   email: text('email').unique().notNull(),
   phone: text('phone').unique(),
+  password: text('password').notNull(),
   expertise: text('expertise').notNull(),
   certifications: text('certifications'),
   bio: text('bio'),
