@@ -15,6 +15,13 @@
       "when": 1732713615174,
       "tag": "0001_careless_vivisector",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1732911138174,
+      "tag": "0002_romantic_scrambler",
+      "breakpoints": true
     }
   ]
 }
