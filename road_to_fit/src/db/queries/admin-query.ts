@@ -1,10 +1,14 @@
 import { eq } from 'drizzle-orm'
 import { db } from '..'
 import { admin, InsertUser, SelectUser } from '../schema/admin.schema'
+import hashPassword from '../../helpers/hashPassword'
 
 // Create admin
 export const createAdmin = async (data: InsertUser) => {
-  await db.insert(admin).values(data)
+  const hashedPassword = await hashPassword(data.password)
+  if (hashedPassword) {
+    await db.insert(admin).values({ ...data, password: hashedPassword })
+  }
 }
 
 // Delete admin

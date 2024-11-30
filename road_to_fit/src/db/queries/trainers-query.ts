@@ -5,6 +5,7 @@ import {
   InsertTrainers,
   SelectTrainers,
 } from '../schema/trainers.schema'
+import hashPassword from '../../helpers/hashPassword'
 
 type UpdateTrainer = Partial<InsertTrainers>
 type SelectTrainersWithId = Partial<SelectTrainers>
@@ -13,10 +14,11 @@ type SelectTrainersWithId = Partial<SelectTrainers>
 export const createTrainer = async (
   trainerData: InsertTrainers
 ): Promise<SelectTrainers> => {
+  const hashedPassword = await hashPassword(trainerData.password)
   try {
     const [newTrainer] = await db
       .insert(trainers)
-      .values(trainerData)
+      .values({ ...trainerData, password: hashedPassword })
       .returning()
     return newTrainer
   } catch (error) {
