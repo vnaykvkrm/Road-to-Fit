@@ -88,12 +88,12 @@ trainer.delete('/:id', async (c) => {
 })
 
 // Update trainer by ID
-trainer.put('/:id', async (c) => {
+trainer.put('update/:id', async (c) => {
   try {
     const id = parseInt(c.req.param('id'))
     const updateData = await c.req.json()
     const updatedTrainer = await updateTrainer(id, updateData)
-    return c.json(updatedTrainer, 200)
+    return c.json({ success: `Trainer updated: ${updatedTrainer?.name}` }, 200)
   } catch (error) {
     console.error(error)
     return c.json({ error: 'Failed to update trainer' }, 500)

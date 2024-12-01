@@ -6,6 +6,7 @@ import {
   SelectTrainers,
 } from '../schema/trainers.schema'
 import hashPassword from '../../helpers/hashPassword'
+import { hash } from 'bcrypt'
 
 type UpdateTrainer = Partial<InsertTrainers>
 type SelectTrainersWithId = Partial<SelectTrainers>
@@ -84,12 +85,15 @@ export const updateTrainer = async (
   updateData: UpdateTrainer
 ): Promise<SelectTrainers | null> => {
   try {
+    if (updateData.password) {
+      updateData.password = await hashPassword(updateData.password)
+    }
     const [updatedTrainer] = await db
       .update(trainers)
       .set(updateData)
       .where(eq(trainers.id, id))
       .returning()
-    return updatedTrainer || null
+    return updatedTrainer
   } catch (error) {
     console.error(`error updating trainer with ID ${id}:`, error)
     throw new Error('failed to update trainer.')
