@@ -1,0 +1,1 @@
+ALTER TABLE `trainers` ADD `password` text NOT NULL;
