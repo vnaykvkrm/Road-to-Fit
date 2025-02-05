@@ -5,8 +5,6 @@ import {
   InsertTrainers,
   SelectTrainers,
 } from '../schema/trainers.schema'
-import hashPassword from '../../helpers/hashPassword'
-import { hash } from 'bcrypt'
 
 type UpdateTrainer = Partial<InsertTrainers>
 type SelectTrainersWithId = Partial<SelectTrainers>
@@ -15,7 +13,7 @@ type SelectTrainersWithId = Partial<SelectTrainers>
 export const createTrainer = async (
   trainerData: InsertTrainers
 ): Promise<SelectTrainers> => {
-  const hashedPassword = await hashPassword(trainerData.password)
+  const hashedPassword = await Bun.password.hash(trainerData.password)
   try {
     const [newTrainer] = await db
       .insert(trainers)
@@ -86,7 +84,7 @@ export const updateTrainer = async (
 ): Promise<SelectTrainers | null> => {
   try {
     if (updateData.password) {
-      updateData.password = await hashPassword(updateData.password)
+      updateData.password = await Bun.password.hash(updateData.password)
     }
     const [updatedTrainer] = await db
       .update(trainers)
