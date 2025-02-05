@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 # Dependencies
 node_modules/
 package-lock.json
@@ -6,3 +7,8 @@ pnpm-lock.yaml
 
 # Environment variables
 .env
+=======
+# deps
+node_modules/
+.env
+>>>>>>> Stashed changes

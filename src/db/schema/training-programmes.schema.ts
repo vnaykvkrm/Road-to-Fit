@@ -4,6 +4,9 @@ import { trainers } from './trainers.schema'
 export const programmes = sqliteTable('training_programmes', {
   id: integer('id').primaryKey({ autoIncrement: true }).notNull(),
   name: text('name').notNull(),
+  image: text('image'),
+  price: integer('price').notNull(),
+  duration: integer('duration').notNull(),
   description: text('description').notNull(),
   trainerId: integer('trainer_id')
     .notNull()

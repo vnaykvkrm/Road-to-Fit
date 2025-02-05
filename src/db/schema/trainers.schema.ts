@@ -11,6 +11,11 @@ export const trainers = sqliteTable('trainers', {
   bio: text('bio'),
   hourlyRate: real('hourly_rate'),
   availability: text('availability'),
+  city: text('city').notNull(),
+  state: text('state').notNull(),
+  zip: text('zip').notNull(),
+  address: text('address').notNull(),
+  country: text('country').notNull(),
   createdAt: text('created_at').default('CURRENT_TIMESTAMP'),
 })
 

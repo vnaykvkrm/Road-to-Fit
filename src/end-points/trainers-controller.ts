@@ -57,6 +57,11 @@ trainer.post('/create', async (c) => {
       hourlyRate,
       availability,
       password,
+      city: '',
+      state: '',
+      zip: '',
+      address: '',
+      country: '',
     })
     return c.json(`Trainer created: ${newTrainer.name}`, 201)
   } catch (error) {
